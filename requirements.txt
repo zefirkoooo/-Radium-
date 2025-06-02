@@ -1,0 +1,13 @@
+Django>=5.0.2,<5.1
+django-crispy-forms>=2.0
+crispy-bootstrap5>=0.7
+openpyxl>=3.1.0
+pandas>=2.0.0
+python-dotenv>=1.0.0
+python-dateutil>=2.8.0
+whitenoise>=6.9.0
+
+# for production deployment
+# gunicorn>=21.2.0
+# psycopg2-binary>=2.9.0  # for PostgreSQL
+# dj-database-url>=2.0.0  # for database URL parsing
