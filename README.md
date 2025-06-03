@@ -279,6 +279,4 @@ If you encounter any issues or have questions, please open an issue on GitHub.
 
 **Made with ❤️ for efficient meal planning / Создано с ❤️ для эффективного планирования питания**
 =======
-![image](https://github.com/user-attachments/assets/559e90cf-0212-4602-8e23-2effbb2294ba)
-![image](https://github.com/user-attachments/assets/f3486770-6643-4c89-81f4-8196198f3d3b)
 >>>>>>> b2598f10206dea6a5ee0cc161f735f61aebdd343
