@@ -731,9 +731,52 @@ def user_management(request):
                 user.delete()
                 messages.success(request, f'Пользователь {username} удален')
 
-    # Оптимизированный запрос пользователей
+    # Получаем даты следующей недели (только для следующей недели показываем статистику)
+    current_date = timezone.now().date()
+    current_week_start = current_date - timedelta(days=current_date.weekday())
+    next_week_start = current_week_start + timedelta(days=7)
+
+    # Получаем все доступные дни следующей недели (понедельник-пятница)
+    available_menus = DayMenu.objects.filter(
+        date__range=[next_week_start, next_week_start + timedelta(days=4)]
+    ).order_by('date')
+
+    total_available_days = available_menus.count()
+
+    # Получаем пользователей
     users = CustomUser.objects.select_related('created_by').order_by('username')
-    return render(request, 'calendar_app/user_management.html', {'users': users})
+
+    # Для каждого пользователя считаем статистику
+    for user in users:
+        # Получаем все выборы пользователя на следующую неделю
+        user_selections = UserSelection.objects.filter(
+            user=user,
+            day_menu__in=available_menus
+        ).values_list('day_menu_id', flat=True)
+
+        filled_days = len(user_selections)
+        missed_days = total_available_days - filled_days
+
+        # Сохраняем статистику
+        user.selection_stats = {
+            'filled_days': filled_days,
+            'missed_days': missed_days,
+            'total_days': total_available_days
+        }
+
+        # Процент заполнения
+        if total_available_days > 0:
+            user.completion_percentage = round((filled_days / total_available_days) * 100, 1)
+        else:
+            user.completion_percentage = 0
+
+    context = {
+        'users': users,
+        'next_week_start': next_week_start,
+        'total_available_days': total_available_days
+    }
+
+    return render(request, 'calendar_app/user_management.html', context)
 
 
 @user_passes_test(is_admin)
