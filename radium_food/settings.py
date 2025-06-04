@@ -27,9 +27,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-secret-key-here')
 DEBUG = False
 
 # Get allowed hosts from environment variable or use default values
-# ALLOWED_HOSTS = ['localhost', '10.0.10.25', 'web-food.local', '127.0.0.1']
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 # Application definition
 
