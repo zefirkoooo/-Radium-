@@ -1,0 +1,422 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - var(--navbar-height) - 2rem);
+    padding: 1rem;
+}
+
+.login-container .card {
+    max-width: 800px;
+    width: 100%;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-title {
+    text-align: center;
+    color: var(--dark-blue);
+    margin-bottom: 2rem;
+}
+
+/* Стили для сообщений только внутри карточки */
+.card .messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.card .messages li {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.card .messages .alert-danger,
+.card .messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.card .messages .alert-success,
+.card .messages .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.card .messages .alert-info,
+.card .messages .info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Скрываем сообщения вне карточки на мобильных */
+@media (max-width: 768px) {
+    body > div[style*="padding"] > .messages {
+        display: none !important;
+    }
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--light-blue);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Разделитель */
+.divider {
+    margin: 2rem 0;
+    text-align: center;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+    z-index: 0;
+}
+
+.divider span {
+    position: relative;
+    background: white;
+    padding: 0 1rem;
+    color: #666;
+    font-size: 0.9rem;
+    z-index: 1;
+}
+
+/* Поисковая секция */
+.search-section {
+    margin-top: 2rem;
+}
+
+.search-title {
+    text-align: center;
+    color: var(--dark-blue);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.search-form {
+    position: relative;
+}
+
+.search-input-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.search-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+
+.search-input {
+    width: 90%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--light-blue);
+}
+
+.search-button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s;
+    flex-shrink: 0;
+}
+
+.search-button:hover {
+    background: var(--dark-blue);
+}
+
+/* Автоподсказки */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background-color 0.2s ease;
+}
+
+/* Иконка перед логином */
+.suggestion-item::before {
+    content: "👤";
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.suggestion-item:hover {
+    background: #f0f8ff;
+    border-left: 3px solid var(--primary-color);
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+/* Стили для специальных состояний */
+.suggestion-item.no-results {
+    color: #666;
+    font-style: italic;
+    cursor: default;
+}
+
+.suggestion-item.no-results::before {
+    content: "❌";
+}
+
+.suggestion-item.error {
+    color: #dc3545;
+    cursor: default;
+}
+
+.suggestion-item.error::before {
+    content: "⚠️";
+}
+
+/* Результаты поиска */
+.search-results {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.results-header h4 {
+    margin: 0;
+    color: var(--dark-blue);
+}
+
+.close-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    font-size: 1.2rem;
+    padding: 0.25rem;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+.week-section {
+    margin-bottom: 1.5rem;
+}
+
+.week-section h5 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.day-card-mini {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+}
+
+.day-card-mini h6 {
+    margin: 0 0 0.5rem 0;
+    color: var(--dark-blue);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.meals-mini {
+    font-size: 0.8rem;
+}
+
+.meal-item {
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+}
+
+.no-selection {
+    color: #666;
+    font-style: italic;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.error {
+    text-align: center;
+    padding: 1rem;
+    color: #dc3545;
+    background: #f8d7da;
+    border-radius: 4px;
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .search-input-group {
+        flex-direction: column;
+    }
+
+    .search-button {
+        justify-content: center;
+    }
+
+    .week-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-results {
+        max-height: 400px;
+    }
+}
+
+.week-section.current-week-only h5 {
+    color: var(--dark-blue);
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.week-section.current-week-only .week-grid {
+    gap: 1.2rem;
+}
+
+.week-section.current-week-only .day-card-mini {
+    background: white;
+    border: 1px solid #e3f2fd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.week-section.current-week-only .day-card-mini:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.day-card-mini h6 {
+    background: var(--primary-color);
+    color: white;
+    margin: -1rem -1rem 0.7rem -1rem;
+    padding: 0.7rem 1rem;
+    border-radius: 6px 6px 0 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.day-card-mini h6 i {
+    color: white;
+    font-size: 0.8rem;
+}
+
+.day-card-mini.no-menu {
+    opacity: 0.7;
+}
+
+.no-menu-item {
+    color: #999;
+    font-style: italic;
+}
+
+.not-eating {
+    color: #dc3545;
+    font-weight: bold;
+}
